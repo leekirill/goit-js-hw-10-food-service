@@ -18,11 +18,35 @@ const Theme = {
   DARK: 'dark-theme',
 };
 
-const btn = document.querySelector("#theme-switch-toggle")
-btn.addEventListener('change', event => {
-    const bodyRef = document.querySelector("body")
-    const bodyToggle = bodyRef.classList.toggle(Theme.DARK)
-    localStorage.setItem('theme', bodyToggle)
-        btn.setAttribute('checked', 'true')
+const STORAGE_KEY = 'theme';
 
+const dataStorage = localStorage.getItem(STORAGE_KEY)
+
+const btn = document.querySelector("#theme-switch-toggle")
+const bodyRef = document.querySelector("body")
+bodyRef.classList.add(Theme.LIGHT)
+
+
+btn.addEventListener('change', event => {
+  if (bodyRef.classList.contains(Theme.LIGHT)) {
+    localStorage.setItem(STORAGE_KEY, Theme.DARK)
+    bodyRef.classList.remove(Theme.LIGHT)
+    bodyRef.classList.add(Theme.DARK)
+  } else {
+    bodyRef.classList.remove(Theme.DARK)
+    bodyRef.classList.add(Theme.LIGHT)
+    localStorage.setItem(STORAGE_KEY, Theme.LIGHT)
+  }
 })
+
+
+
+ 
+console.log(dataStorage)
+
+
+ 
+
+
+
+// console.log(localStorage.getItem('theme'))
